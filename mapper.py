@@ -1,3 +1,5 @@
+import output
+
 keywords = {
 	'cowk':'coke',
 	'coke':'coke',
@@ -6,6 +8,12 @@ keywords = {
 	'hackathon':'hackathon',
 	'hackasin':'hackathon',
 	'hekesin': 'hackathon'
+}
+
+keyword_to_fun = {
+	'coke' : 'led_on',
+	'mate' : 'dont_puke',
+	'hackathon' : 'puke'
 }
 
 def get_keywords():
@@ -20,6 +28,4 @@ def word_found(word):
 
 
 def keyword_found(kw):
-	#TODO map here
-	print(kw)
-	pass
+	eval("output."+keyword_to_fun[kw]+"()")
