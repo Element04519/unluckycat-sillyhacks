@@ -8,7 +8,7 @@ def callback(_, audio):
 		print(result)
 		
 		for word in result.split(' '):
-			mapper.word_found(word)
+			mapper.process_word(word)
 	
 	except sr.UnknownValueError:
 	    print("Sphinx could not understand audio")

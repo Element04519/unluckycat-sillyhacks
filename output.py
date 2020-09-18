@@ -51,10 +51,13 @@ def dont_shout():
 	print("Called dont_shout()")
 	pass
 
+def turn_off():
+	led_off()
+	dont_move_head()
+	dont_move_head()
+	dont_move_head()
+	set_arm_speed(0)
+
+#turn_off() #safe state at start
 
 
-led_off()
-dont_move_head()
-dont_move_head()
-dont_move_head()
-set_arm_speed(0)
