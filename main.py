@@ -8,7 +8,7 @@ import numpy as np
 #import RPi.GPIO as GPIO
 
 LIGHT_GPIO = 5
-
+https://github.com/Element04519/unluckycat-sillyhacks/pull/5/conflicts
 def count_keyword_usage(recognized, keys):
 	counting = dict()
 
@@ -17,7 +17,7 @@ def count_keyword_usage(recognized, keys):
 		current_counting = dict()
 
 		for word in text.split(' '):
-			if word in mapper.keyword_dict:
+			if word.lower() in mapper.word_dict:
 				if not word in current_counting:
 					current_counting[word] = 0
 
@@ -84,10 +84,11 @@ def get_sound(indata, outdata, frames, time, status):
     mapper.process_sound(int(volume_norm))
 
 with sd.Stream(callback=get_sound):
-	while True:
+  ## Don't stop waiting. Ever.
+  while True:
 		sd.sleep(60000)
 		mapper.trigger_20_sec()
 
 
-## Don't stop waiting. Ever.
+
 
