@@ -1,6 +1,6 @@
 import output
 
-bullshit_words = {"agile", "modular", "blockchain", "crypto", "bitcoin", "tesla", "ai"}
+bullshit_words = {"agile", "modular", "blockchain", "crypto", "bitcoin", "tesla", "AI"}
 good_words = {"coke", "mate", "hackathon", "hackspace", "hacker", "python"}
 bad_words = {"beer", "wine", "party", "marketing", "ads", "advertisment", "sun", "birds", "daylight", "javascript", "php"}
 
@@ -27,10 +27,6 @@ for w in good_words:
 	keyword_dict[w] = "good"
 for w in bad_words:
 	keyword_dict[w] = "bad"
-
-def process_word(word):
-	if word in keyword_dict:
-		keyword_found(word)
 
 def keyword_found(kw):
 	global bullshit_cnt, good_cnt, bad_cnt
@@ -70,3 +66,10 @@ def trigger_20_sec():
 		state[0] -= 1
 	print("State[0] = " + str(state[0]))
 	process_state()
+  
+def light_turned_on():
+	pass
+
+def light_turned_off():
+	pass
+

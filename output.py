@@ -10,4 +10,8 @@ def set_puke(level = 0): #0,1
 	print("Setting puke..." + str(level))
 
 
+def shout():
+	print("Bullshit!")
 
+def beep():
+	print("Beep!")
