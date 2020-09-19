@@ -24,4 +24,5 @@ with mic as source:
 r.listen_in_background(mic, callback)
 
 while True:
-	sleep(0.1)
+	sleep(20)
+	mapper.trigger_20_sec()
