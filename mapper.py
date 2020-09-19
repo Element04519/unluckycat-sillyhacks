@@ -29,17 +29,8 @@ for w in bad_words:
 	keyword_dict[w] = "bad"
 
 def process_word(word):
-	#if word in keyword_dict:
-	#	keyword_found(word)
-	keyword_found("agile")
-	keyword_found("agile")
-	keyword_found("agile")
-	keyword_found("agile")
-	keyword_found("agile")
-	keyword_found("agile")
-	keyword_found("agile")
-	keyword_found("agile")
-	keyword_found("agile")
+	if word in keyword_dict:
+		keyword_found(word)
 
 def keyword_found(kw):
 	global bullshit_cnt, good_cnt, bad_cnt
@@ -52,8 +43,8 @@ def keyword_found(kw):
 			#else output.scream_bullshit()
 	if kw in good_words:
 		good_cnt += 1
-		if good_count == good_step:
-			good_count = 0
+		if good_cnt == good_step:
+			good_cnt = 0
 			if state[1] > 0:
 				state[1]-=1
 			#else output.scream_bullshit()
@@ -67,12 +58,15 @@ def keyword_found(kw):
 	process_state()
 	
 def process_state():
+	print("Settings state...")
 	output.set_led(state_machine[state[0]][state[1]][0])
 	output.set_arm(state_machine[state[0]][state[1]][1])
 	output.set_puke(state_machine[state[0]][state[1]][2])
+	print("")
 
 def trigger_20_sec():
 	global state
 	if state[0] > 0: 
 		state[0] -= 1
-	print(str(state[0]))
+	print("State[0] = " + str(state[0]))
+	process_state()
