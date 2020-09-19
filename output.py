@@ -2,7 +2,7 @@
 import RPi.GPIO as GPIO
 import time
 import serial
-import asyncio
+import atexit
 
 GPIO.setmode(GPIO.BCM)
 
@@ -14,6 +14,15 @@ arm = GPIO.PWM(12, 1000)
 
 arm_level = 0
 old_arm_level = 0
+
+def safe_stop():
+        arm_level = 0
+        reset_pwm()
+
+        GPIO.output(13, GPIO.LOW)
+        time.sleep(0.2)
+
+atexit.register(safe_stop)
 
 def set_led(level = 0): #0,1,2,3,4
         print("Setting led..."+str(level))
