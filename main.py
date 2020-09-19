@@ -35,7 +35,7 @@ def count_keyword_usage(recognized, keys):
 
 
 def word_listening_callback(_, audio):
-    print("calback triggered")
+    print("callback triggered")
     try:
         result = r.recognize_google(audio, show_all=True)
         print(result)
@@ -89,7 +89,7 @@ def get_sound(indata, outdata, frames, time, status):
   ## Don't stop waiting. Ever.
 
 count = 0
-goal = 600
+goal = 300
 output.start_pwm()
 
 while True:

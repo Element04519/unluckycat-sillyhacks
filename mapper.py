@@ -50,8 +50,6 @@ def process_keyword(kw, state):
 			good_cnt = 0
 			if state[1] > 0:
 				state[1]-=1
-			else:
-				output.shout()
 	if kw in bad_words:
 		bad_cnt +=1 
 		if bad_cnt == bad_step:
@@ -64,10 +62,11 @@ def process_keyword(kw, state):
 
 def keyword_found(result):
 	global state
-	local_state = [0,0]
+	local_state = state
 	for word in result:
 		for i in range(0,result[word]):
-			local_state = process_keyword(kw, local_state)
+			local_state = process_keyword(word, local_state)
+			print("local state: x=" + str(local_state[0]) + ", y=" + str(local_state[1]))
 	state = local_state
 	process_state()
 
