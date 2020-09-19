@@ -87,3 +87,5 @@ def sound_quiet():
 	process_state()
 
 
+def process_sound(volume):
+	pass
