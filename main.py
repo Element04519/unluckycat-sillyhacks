@@ -2,10 +2,10 @@ from time import sleep
 import speech_recognition as sr
 import mapper
 
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 
 LIGHT_GPIO = 5
-
+https://github.com/Element04519/unluckycat-sillyhacks/pull/5/conflicts
 def count_keyword_usage(recognized, keys):
 	counting = dict()
 
@@ -39,7 +39,7 @@ def word_listening_callback(_, audio):
 		if result == []:
 			return
 
-		result_by_words = count_keyword_usage(result['alternative'], mapper.word_dict.keys())
+		result_by_words = count_keyword_usage(result['alternative'], mapper.keyword_dict.keys())
 		print(result_by_words)
 		
 		for word in result_by_words:
@@ -71,16 +71,16 @@ r.listen_in_background(mic, word_listening_callback)
 
 ## Start listening to light sensor
 
-GPIO.setmode(GPIO.BCM) #GPIO Nr (GPIO.setmode(GPIO.BOARD) for Pin Nr)
-GPIO.setup(LIGHT_PIN, GPIO.IN)
+#GPIO.setmode(GPIO.BCM) #GPIO Nr (GPIO.setmode(GPIO.BOARD) for Pin Nr)
+#GPIO.setup(LIGHT_PIN, GPIO.IN)
 
-GPIO.add_event_detect(LIGHT_PIN, GPIO.BOTH, callback=light_sensor_callback)
+#GPIO.add_event_detect(LIGHT_PIN, GPIO.BOTH, callback=light_sensor_callback)
 
 
 
 ## Don't stop waiting. Ever.
 
 while True:
-	sleep(20)
+	sleep(60)
 	mapper.trigger_20_sec()
 

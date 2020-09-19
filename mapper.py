@@ -16,9 +16,9 @@ bullshit_cnt = 0
 bad_cnt = 0
 good_cnt = 0
 
-bullshit_step = 3
-bad_step = 3
-good_step = 3
+bullshit_step = 1
+bad_step = 1
+good_step = 1
 
 arm_mod = 0
 led_mod = 0
