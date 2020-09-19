@@ -1,7 +1,7 @@
 import output
 
-bullshit_words = {"agile", "modular", "blockchain", "crypto", "bitcoin", "tesla", "AI"}
-good_words = {"coke", "mate", "hackathon", "hackspace", "hacker", "python"}
+bullshit_words = {"agile", "modular", "blockchain", "crypto", "bitcoin", "tesla", "ai"}
+good_words = {"coke", "mate", "hackathon", "hackspace", "hacker", "python", "marta"}
 bad_words = {"beer", "wine", "party", "marketing", "ads", "advertisment", "sun", "birds", "daylight", "javascript", "php"}
 
 state_machine = [
@@ -19,6 +19,9 @@ good_cnt = 0
 bullshit_step = 3
 bad_step = 3
 good_step = 3
+
+arm_mod = 0
+led_mod = 0
 
 keyword_dict = dict()
 for w in bullshit_words:
@@ -55,8 +58,8 @@ def keyword_found(kw):
 	
 def process_state():
 	print("Settings state...")
-	output.set_led(state_machine[state[0]][state[1]][0])
-	output.set_arm(state_machine[state[0]][state[1]][1])
+	output.set_led(state_machine[state[0]][state[1]][0]+led_mod)
+	output.set_arm(state_machine[state[0]][state[1]][1]+arm_mod)
 	output.set_puke(state_machine[state[0]][state[1]][2])
 	print("")
 
@@ -68,8 +71,19 @@ def trigger_20_sec():
 	process_state()
   
 def light_turned_on():
-	pass
+	arm_mod = 1	
+	process_state()
 
 def light_turned_off():
-	pass
+	arm_mod = 0
+	process_state()
+
+def sound_loud():
+	led_mod = 1
+	process_state()
+
+def sound_quiet():
+	led_mod = 0
+	process_state()
+
 

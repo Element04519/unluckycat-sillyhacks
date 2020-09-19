@@ -14,7 +14,7 @@ def count_keyword_usage(recognized, keys):
 		current_counting = dict()
 
 		for word in text.split(' '):
-			if word in mapper.word_dict:
+			if word.lower() in mapper.word_dict:
 				if not word in current_counting:
 					current_counting[word] = 0
 
@@ -83,3 +83,4 @@ GPIO.add_event_detect(LIGHT_PIN, GPIO.BOTH, callback=light_sensor_callback)
 while True:
 	sleep(20)
 	mapper.trigger_20_sec()
+
