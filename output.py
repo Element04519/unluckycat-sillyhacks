@@ -10,27 +10,29 @@ GPIO.setup(12, GPIO.OUT)
 GPIO.setup(13, GPIO.OUT)
 
 s = serial.Serial('/dev/ttyUSB0', 115200)
+s.close()
+s.open()
+while(not s.is_open):
+    time.sleep(0.1)
 arm = GPIO.PWM(12, 1000)
 
 arm_level = 0
 old_arm_level = 0
 
 def safe_stop():
-        arm_level = 0
-        reset_pwm()
+    arm_level = 0
+    reset_pwm()
 
-        GPIO.output(13, GPIO.LOW)
-        time.sleep(0.2)
+    GPIO.output(13, GPIO.LOW)
+    s.write("0".encode())
+    time.sleep(0.2)
+    s.close()
 
 atexit.register(safe_stop)
 
 def set_led(level = 0): #0,1,2,3,4
-        print("Setting led..."+str(level))
-        s.close()
-        s.open()
-        time.sleep(5)
-        s.write(str(level).encode())
-        s.close()
+    print("Setting led..."+str(level))
+    s.write(str(level).encode())
 
 def set_arm(level = 0): #0,1,2,3
     print("Setting arm..."+str(level))
