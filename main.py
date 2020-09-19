@@ -86,7 +86,7 @@ with sd.Stream(callback=get_sound):
   ## Don't stop waiting. Ever.
   while True:
     sd.sleep(60000)
-    mapper.trigger_20_sec()
+    mapper.trigger_time()
 
 
 
