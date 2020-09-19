@@ -2,6 +2,12 @@ from time import sleep
 import speech_recognition as sr
 import mapper
 
+import sounddevice as sd
+import numpy as np
+
+#import RPi.GPIO as GPIO
+
+LIGHT_GPIO = 5
 def count_keyword_usage(recognized, keys):
 	counting = dict()
 
@@ -9,8 +15,8 @@ def count_keyword_usage(recognized, keys):
 		text = entry['transcript']
 		current_counting = dict()
 
-		for word in text.split(' '):
-			if word in mapper.word_dict:
+		for word in text.lower().split(' '):
+			if word.lower() in mapper.keyword_dict:
 				if not word in current_counting:
 					current_counting[word] = 0
 
@@ -27,7 +33,7 @@ def count_keyword_usage(recognized, keys):
 
 
 
-def callback(_, audio):
+def word_listening_callback(_, audio):
 	try:
 		result = r.recognize_google(audio, show_all=True)
 		print(result)
@@ -35,7 +41,7 @@ def callback(_, audio):
 		if result == []:
 			return
 
-		result_by_words = count_keyword_usage(result['alternative'], mapper.word_dict.keys())
+		result_by_words = count_keyword_usage(result['alternative'], mapper.keyword_dict.keys())
 		print(result_by_words)
 		
 		for word in result_by_words:
@@ -47,13 +53,38 @@ def callback(_, audio):
 	except sr.RequestError as e:
 	    print(" error; {0}".format(e))
 
+
+def light_sensor_callback():
+	if GPIO.input(LIGHT_PIN):
+		mapper.light_turned_off()
+	else:
+		mapper.light_turned_on()
+
+
+
+## Start listening to words
 r = sr.Recognizer()
 mic = sr.Microphone()
 
 with mic as source:
 	r.adjust_for_ambient_noise(source)
 
-r.listen_in_background(mic, callback)
+r.listen_in_background(mic, word_listening_callback)
 
+## Start listening to light sensor
+
+#GPIO.setmode(GPIO.BCM) #GPIO Nr (GPIO.setmode(GPIO.BOARD) for Pin Nr)
+#GPIO.setup(LIGHT_PIN, GPIO.IN)
+
+#GPIO.add_event_detect(LIGHT_PIN, GPIO.BOTH, callback=light_sensor_callback)
+
+def get_sound(indata, outdata, frames, time, status):
+    volume_norm = np.linalg.norm(indata)*10
+    mapper.process_sound(int(volume_norm))
+
+#with sd.Stream(callback=get_sound):
+  ## Don't stop waiting. Ever.
 while True:
-	sleep(0.1)
+	sd.sleep(60000)
+	mapper.trigger_time()
+

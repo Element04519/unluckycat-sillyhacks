@@ -38,9 +38,9 @@ def set_puke(level = 0): #0,1
             GPIO.output(13, GPIO.LOW)
         else:
             GPIO.output(13, GPIO.HIGH)
-
 def shout():
-	print("Bullshit!")
+	print("BULLSHIT")
+	pass
 
 def beep():
-	print("Beep!")
+	pass
