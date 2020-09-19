@@ -56,7 +56,7 @@ def keyword_found(kw):
 		bad_cnt +=1 
 		if bad_cnt == bad_step:
 			bad_cnt = 0
-			if state[1] < 2:
+			if state[1] < 3:
 				state[1]+=1	
 			else:
 				output.shout()

@@ -19,6 +19,9 @@ def safe_stop():
         arm_level = 0
         reset_pwm()
 
+        GPIO.output(13, GPIO.LOW)
+        time.sleep(0.2)
+
 atexit.register(safe_stop)
 
 def set_led(level = 0): #0,1,2,3,4
