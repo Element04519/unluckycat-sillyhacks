@@ -14,5 +14,11 @@ for w in bad_words:
 	keyword_dict[w] = "bad"
 
 def keyword_found(kw):
+  pass
+  
+def light_turned_on():
 	pass
-	
+
+def light_turned_off():
+	pass
+
