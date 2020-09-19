@@ -81,4 +81,5 @@ GPIO.add_event_detect(LIGHT_PIN, GPIO.BOTH, callback=light_sensor_callback)
 ## Don't stop waiting. Ever.
 
 while True:
-	sleep(0.1)
+	sleep(20)
+	mapper.trigger_20_sec()
