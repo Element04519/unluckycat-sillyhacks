@@ -31,7 +31,7 @@ def count_keyword_usage(recognized, keys):
 
 
 
-def callback(_, audio):
+def word_listening_callback(_, audio):
 	try:
 		result = r.recognize_google(audio, show_all=True)
 		print(result)
@@ -67,7 +67,7 @@ mic = sr.Microphone()
 with mic as source:
 	r.adjust_for_ambient_noise(source)
 
-r.listen_in_background(mic, callback)
+r.listen_in_background(mic, word_listening_callback)
 
 ## Start listening to light sensor
 
