@@ -73,3 +73,5 @@ def light_turned_on():
 def light_turned_off():
 	pass
 
+def process_sound(volume):
+	pass
