@@ -8,18 +8,19 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(12, GPIO.OUT)
 GPIO.setup(13, GPIO.OUT)
 
+s = serial.Serial('/dev/ttyUSB0', 9600)
 
 
 def set_led(level = 0): #0,1,2,3,4
-	#print("Setting led...")
-        s = serial.Serial('/dev/ttyUSB0', 9600)
+        print("Setting led...")
+        s.close()
         s.open()
         time.sleep(5)
         s.write(str(level).encode())
         s.close()
 
 def set_arm(level = 0): #0,1,2,3
-	#print("Setting arm...")
+        print("Setting arm...")
         arm = GPIO.PWM(12, 1000)
         arm.start(100)
         time.sleep(0.2)
@@ -33,7 +34,7 @@ def set_arm(level = 0): #0,1,2,3
             arm.CHangeDutyCycle(100)
             
 def set_puke(level = 0): #0,1
-	#print("Setting puke...")
+        print("Setting puke...")
         if level == 0:
             GPIO.output(13, GPIO.LOW)
         else:

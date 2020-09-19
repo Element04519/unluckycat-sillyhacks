@@ -2,7 +2,7 @@ from time import sleep
 import speech_recognition as sr
 import mapper
 
-import sounddevice as sd
+#import sounddevice as sd
 import numpy as np
 
 #import RPi.GPIO as GPIO
@@ -34,6 +34,7 @@ def count_keyword_usage(recognized, keys):
 
 
 def word_listening_callback(_, audio):
+	print("calback triggered")
 	try:
 		result = r.recognize_google(audio, show_all=True)
 		print(result)
@@ -60,17 +61,19 @@ def light_sensor_callback():
 	else:
 		mapper.light_turned_on()
 
-
+print("try starting")
 
 ## Start listening to words
 r = sr.Recognizer()
 mic = sr.Microphone()
 
+print("initialized")
+
 with mic as source:
 	r.adjust_for_ambient_noise(source)
 
 r.listen_in_background(mic, word_listening_callback)
-
+print("started listening")
 ## Start listening to light sensor
 
 #GPIO.setmode(GPIO.BCM) #GPIO Nr (GPIO.setmode(GPIO.BOARD) for Pin Nr)
@@ -85,6 +88,7 @@ def get_sound(indata, outdata, frames, time, status):
 #with sd.Stream(callback=get_sound):
   ## Don't stop waiting. Ever.
 while True:
-	sd.sleep(60000)
+	sleep(60)
+	#sd.sleep(60000)
 	mapper.trigger_time()
 
