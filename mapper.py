@@ -1,6 +1,6 @@
 import output
 
-bullshit_words = {"agile", "modular", "blockchain", "crypto", "bitcoin", "tesla", "ai"}
+bullshit_words = {"agile", "modular", "blockchain", "crypto", "bitcoin", "tesla", "ai", "influencer"}
 good_words = {"coke", "mate", "hackathon", "hackspace", "hacker", "python", "marta"}
 bad_words = {"beer", "wine", "party", "marketing", "ads", "advertisment", "sun", "birds", "daylight", "javascript", "php"}
 
@@ -63,7 +63,7 @@ def process_state():
 	output.set_puke(state_machine[state[0]][state[1]][2])
 	print("")
 
-def trigger_20_sec():
+def trigger_time():
 	global state
 	if state[0] > 0: 
 		state[0] -= 1
@@ -85,7 +85,6 @@ def sound_loud():
 def sound_quiet():
 	led_mod = 0
 	process_state()
-
 
 def process_sound(volume):
 	pass
