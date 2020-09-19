@@ -66,6 +66,10 @@ def process_state():
 	output.set_led(state_machine[state[0]][state[1]][0]+led_mod)
 	output.set_arm(state_machine[state[0]][state[1]][1]+arm_mod)
 	output.set_puke(state_machine[state[0]][state[1]][2])
+	print_state()
+
+def print_state():
+	print("State:(x=" + str(state[0]) + ", y=" + str(state[1]) + ") led_mod=" + str(led_mod) + ", arm_mod=" + str(arm_mod))
 
 def trigger_time():
 	global state
