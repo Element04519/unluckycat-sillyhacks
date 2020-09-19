@@ -15,3 +15,9 @@ for w in bad_words:
 
 def keyword_found(kw):
 	print(kw)
+
+def light_turned_on():
+	pass
+
+def light_turned_off():
+	pass
