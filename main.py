@@ -5,7 +5,7 @@ import mapper
 #import RPi.GPIO as GPIO
 
 LIGHT_GPIO = 5
-
+https://github.com/Element04519/unluckycat-sillyhacks/pull/5/conflicts
 def count_keyword_usage(recognized, keys):
 	counting = dict()
 
@@ -14,7 +14,7 @@ def count_keyword_usage(recognized, keys):
 		current_counting = dict()
 
 		for word in text.split(' '):
-			if word in mapper.keyword_dict:
+			if word.lower() in mapper.word_dict:
 				if not word in current_counting:
 					current_counting[word] = 0
 
@@ -83,3 +83,4 @@ r.listen_in_background(mic, word_listening_callback)
 while True:
 	sleep(60)
 	mapper.trigger_20_sec()
+
