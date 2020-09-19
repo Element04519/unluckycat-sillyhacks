@@ -35,7 +35,7 @@ def count_keyword_usage(recognized, keys):
 
 
 def word_listening_callback(_, audio):
-    print("calback triggered")
+    print("callback triggered")
     try:
         result = r.recognize_google(audio, show_all=True)
         print(result)
@@ -46,9 +46,7 @@ def word_listening_callback(_, audio):
         result_by_words = count_keyword_usage(result['alternative'], mapper.keyword_dict.keys())
         print(result_by_words)
         
-        for word in result_by_words:
-            for i in range(result_by_words[word]):
-                mapper.keyword_found(word)
+        mapper.keyword_found(result_by_words)
     
     except sr.UnknownValueError:
         print("Google could not understand audio")
@@ -91,7 +89,7 @@ def get_sound(indata, outdata, frames, time, status):
   ## Don't stop waiting. Ever.
 
 count = 0
-goal = 600
+goal = 300
 output.start_pwm()
 
 while True:
