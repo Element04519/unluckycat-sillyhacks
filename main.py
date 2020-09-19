@@ -2,6 +2,9 @@ from time import sleep
 import speech_recognition as sr
 import mapper
 
+import sounddevice as sd
+import numpy as np
+
 #import RPi.GPIO as GPIO
 
 LIGHT_GPIO = 5
@@ -76,10 +79,15 @@ r.listen_in_background(mic, word_listening_callback)
 
 #GPIO.add_event_detect(LIGHT_PIN, GPIO.BOTH, callback=light_sensor_callback)
 
+def get_sound(indata, outdata, frames, time, status):
+    volume_norm = np.linalg.norm(indata)*10
+    mapper.process_sound(int(volume_norm))
+
+with sd.Stream(callback=get_sound):
+	while True:
+		sd.sleep(60000)
+		mapper.trigger_20_sec()
 
 
 ## Don't stop waiting. Ever.
 
-while True:
-	sleep(60)
-	mapper.trigger_20_sec()
