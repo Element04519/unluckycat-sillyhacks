@@ -46,9 +46,7 @@ def word_listening_callback(_, audio):
         result_by_words = count_keyword_usage(result['alternative'], mapper.keyword_dict.keys())
         print(result_by_words)
         
-        for word in result_by_words:
-            for i in range(result_by_words[word]):
-                mapper.keyword_found(word)
+        mapper.keyword_found(result_by_words)
     
     except sr.UnknownValueError:
         print("Google could not understand audio")

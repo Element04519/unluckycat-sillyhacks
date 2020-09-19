@@ -34,7 +34,7 @@ for w in good_words:
 for w in bad_words:
 	keyword_dict[w] = "bad"
 
-def keyword_found(kw):
+def process_keyword(kw, state):
 	global bullshit_cnt, good_cnt, bad_cnt
 	if kw in bullshit_words:
 		bullshit_cnt += 1 
@@ -60,7 +60,18 @@ def keyword_found(kw):
 				state[1]+=1	
 			else:
 				output.shout()
+	return state
+
+def keyword_found(result):
+	global state
+	local_state = [0,0]
+	for word in result:
+		for i in range(0,result[word]):
+			local_state = process_keyword(kw, local_state)
+	state = local_state
 	process_state()
+
+
 	
 def process_state():
 	output.set_led(state_machine[state[0]][state[1]][0]+led_mod)
