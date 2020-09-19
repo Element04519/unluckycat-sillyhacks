@@ -15,7 +15,7 @@ def count_keyword_usage(recognized, keys):
 		text = entry['transcript']
 		current_counting = dict()
 
-		for word in text.split(' '):
+		for word in text.lower().split(' '):
 			if word.lower() in mapper.keyword_dict:
 				if not word in current_counting:
 					current_counting[word] = 0
@@ -82,12 +82,9 @@ def get_sound(indata, outdata, frames, time, status):
     volume_norm = np.linalg.norm(indata)*10
     mapper.process_sound(int(volume_norm))
 
-with sd.Stream(callback=get_sound):
+#with sd.Stream(callback=get_sound):
   ## Don't stop waiting. Ever.
-  while True:
-    sd.sleep(60000)
-    mapper.trigger_20_sec()
-
-
-
+while True:
+	sd.sleep(60000)
+	mapper.trigger_time()
 
