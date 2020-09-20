@@ -5,8 +5,7 @@ import output
 
 #import sounddevice as sd
 import numpy as np
-
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 LIGHT_GPIO = 5
 def count_keyword_usage(recognized, keys):
@@ -54,11 +53,11 @@ def word_listening_callback(_, audio):
         print(" error; {0}".format(e))
 
 
-def light_sensor_callback():
-    if GPIO.input(LIGHT_PIN):
-        mapper.light_turned_off()
-    else:
-        mapper.light_turned_on()
+#def light_sensor_callback():
+#    if GPIO.input(LIGHT_PIN):
+#        mapper.light_turned_off()
+#    else:
+#        mapper.light_turned_on()
     
 
 print("try starting")
@@ -76,8 +75,8 @@ r.listen_in_background(mic, word_listening_callback)
 print("started listening")
 ## Start listening to light sensor
 
-#GPIO.setmode(GPIO.BCM) #GPIO Nr (GPIO.setmode(GPIO.BOARD) for Pin Nr)
-#GPIO.setup(LIGHT_PIN, GPIO.IN)
+GPIO.setmode(GPIO.BCM) #GPIO Nr (GPIO.setmode(GPIO.BOARD) for Pin Nr)
+GPIO.setup(LIGHT_GPIO, GPIO.IN)
 
 #GPIO.add_event_detect(LIGHT_PIN, GPIO.BOTH, callback=light_sensor_callback)
 
@@ -91,6 +90,7 @@ def get_sound(indata, outdata, frames, time, status):
 count = 0
 goal = 300
 output.start_pwm()
+light_was_on = False
 
 while True:
     sleep(0.1)
@@ -100,3 +100,15 @@ while True:
     if count >= goal:
         count = 0
         mapper.trigger_time()
+
+    if not GPIO.input(LIGHT_GPIO): #light on now
+        #print("an")
+        if not light_was_on:
+            mapper.light_turned_on()
+            light_was_on = True
+    else:
+        #print("aus")
+        if light_was_on:
+            mapper.light_turned_off()
+            light_was_on = False
+
