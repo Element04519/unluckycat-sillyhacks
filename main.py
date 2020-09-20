@@ -102,12 +102,12 @@ while True:
         mapper.trigger_time()
 
     if not GPIO.input(LIGHT_GPIO): #light on now
-        print("an")
+        #print("an")
         if not light_was_on:
             mapper.light_turned_on()
             light_was_on = True
     else:
-        print("aus")
+        #print("aus")
         if light_was_on:
             mapper.light_turned_off()
             light_was_on = False
